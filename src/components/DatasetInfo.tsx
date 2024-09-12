@@ -74,7 +74,7 @@ const DatasetInfo: React.FC<DatasetInfoProps> = ({
                   Anchor Timestamp
                 </h3>
                 <p className="text-base font-medium text-gray-900 mt-1">
-                  {anchorTimestamp || "Not Found"}
+                  {anchorTimestamp || "None"}
                 </p>
               </div>
 
@@ -83,7 +83,7 @@ const DatasetInfo: React.FC<DatasetInfoProps> = ({
                   Attestations
                 </h3>
                 <p className="text-base font-medium text-gray-900 mt-1">
-                  {attestations || "Not Found"}
+                  {attestations || "None"}
                 </p>
               </div>
             </div>
@@ -105,7 +105,7 @@ const DatasetInfo: React.FC<DatasetInfoProps> = ({
                         </a>
                       </div>
                     ))
-                  : "Not Found"}{" "}
+                  : "None"}{" "}
               </div>
             </div>
           </div>

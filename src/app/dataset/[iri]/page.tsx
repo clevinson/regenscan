@@ -14,7 +14,7 @@ interface DatasetProps {
 export default async function Dataset({ params }: DatasetProps) {
   let { iri } = params;
   iri = decodeURIComponent(iri);
-  let dataset: Dataset | null = null;
+  let dataset: any | null = null;
   let usedIn: Array<Reference> | null = [];
   let anchorTimestamp: string | null = null;
   let attestations: string | null = null;
@@ -51,11 +51,23 @@ export default async function Dataset({ params }: DatasetProps) {
 
     if (datasetId && datasetId.includes("app.regen.network/project/")) {
       const projectId = datasetId.split("app.regen.network/project/")[1];
-      const projectResponse = await axios.get(
+      const response = await axios.get(
         `http://mainnet.regen.network:1317/regen/ecocredit/v1/project/${projectId}`
       );
-      if (projectResponse.data["project"]["metadata"] == iri) {
+      if (response.data["project"]["metadata"] == iri) {
         usedIn.push({ refType: "project", id: projectId });
+      }
+    } else if (
+      datasetType &&
+      datasetType.match(/^regen:[A-Z]{1,3}\d{2}-CreditClass$/)
+    ) {
+      const match = datasetType.match(/^regen:([A-Z]{1,3}\d{2})-CreditClass$/);
+      const creditClassId = match ? match[1] : "";
+      const response = await axios.get(
+        `http://mainnet.regen.network:1317/regen/ecocredit/v1/class/${creditClassId}`
+      );
+      if (response.data["class"]["metadata"] == iri) {
+        usedIn.push({ refType: "creditClass", id: creditClassId });
       }
     }
 

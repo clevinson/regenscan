@@ -2,6 +2,12 @@
 
 import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import {
+  regenIRIRegex,
+  projectRegex,
+  classRegex,
+  batchRegex,
+} from "@/utils/constants";
 
 export default function Home() {
   const [iri, setIri] = useState<string>("");
@@ -10,7 +16,15 @@ export default function Home() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (iri) {
-      router.push(`/dataset/${iri}`);
+      if (iri.match(regenIRIRegex)) {
+        router.push(`/dataset/${iri}`);
+      } else if (iri.match(projectRegex)) {
+        router.push(`/project/${iri}`);
+      } else if (iri.match(classRegex)) {
+        router.push(`/class/${iri}`);
+      } else if (iri.match(batchRegex)) {
+        router.push(`/batch/${iri}`);
+      }
     }
   };
 
@@ -24,7 +38,7 @@ export default function Home() {
           type="text"
           value={iri}
           onChange={(e) => setIri(e.target.value)}
-          placeholder="Enter IRI"
+          placeholder="Enter Regen IRI, Project ID, Credit Class ID, or Batch ID"
           className="px-4 py-2 w-[480px] border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
         <button

@@ -1,10 +1,12 @@
 import axios from "axios";
-import JsonViewer from "../../../components/JsonViewer";
-import DatasetInfo from "@/components/DatasetInfo";
 import { Project } from "@/utils/types";
 import React from "react";
-import dayjs from "dayjs";
 import MetadataLink from "@/components/MetadataLink";
+import CreditClassLink from "@/components/CreditClassLink";
+import AddressLink from "@/components/AddressLink";
+import { InfoTable, KeyColumn, ValueColumn } from "@/components/InfoTable";
+import JsonViewer from "@/components/JsonViewer";
+import ResolvedMetadata from "@/components/ResolvedMetadata";
 
 interface ProjectPageProps {
   params: {
@@ -36,21 +38,26 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <>
           <h3 className="mb-2 text-lg font-semibold">Project: {project.id}</h3>
           <div className="text-xs max-h-96 overflow-y-auto p-4 bg-gray-50 rounded-lg border border-gray-300">
-            <div className="grid grid-cols-2 gap-4 w-48 ">
-              <div className="font-semibold">Project ID:</div>
-              <div>{project.id}</div>
-              <div className="font-semibold">Admin:</div>
-              <div>{project.admin}</div>
-              <div className="font-semibold">Credit Class:</div>{" "}
-              <div>{project.class_id}</div>
-              <div className="font-semibold">Jurisdiction:</div>
-              <div>{project.jurisdiction}</div>
-              <div className="font-semibold">Metadata:</div>
-              <MetadataLink iri={project.metadata} />
-              <div className="font-semibold">Reference ID:</div>
-              <div>{project.reference_id}</div>
-            </div>
+            <InfoTable>
+              <KeyColumn>Admin:</KeyColumn>
+              <ValueColumn>
+                <AddressLink address={project.admin} />
+              </ValueColumn>
+              <KeyColumn>Credit Class:</KeyColumn>
+              <ValueColumn>
+                <CreditClassLink id={project.class_id} />
+              </ValueColumn>
+              <KeyColumn>Jurisdiction:</KeyColumn>
+              <ValueColumn>{project.jurisdiction}</ValueColumn>
+              <KeyColumn>Metadata:</KeyColumn>
+              <ValueColumn>
+                <MetadataLink iri={project.metadata} />
+              </ValueColumn>
+              <KeyColumn>Reference ID:</KeyColumn>
+              <ValueColumn>{project.reference_id}</ValueColumn>
+            </InfoTable>
           </div>
+          <ResolvedMetadata iri={project.metadata} />
         </>
       )}
     </div>
