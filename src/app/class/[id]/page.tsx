@@ -6,6 +6,7 @@ import AddressLink from "@/components/AddressLink";
 import SeeMore from "@/components/SeeMore";
 import { InfoTable, KeyColumn, ValueColumn } from "@/components/InfoTable";
 import ResolvedMetadata from "@/components/ResolvedMetadata";
+import Header from "@/components/Header";
 
 interface CreditClassPageProps {
   params: {
@@ -43,6 +44,7 @@ export default async function CreditClassPage({
 
   return (
     <div className="max-w-4xl mx-auto p-6">
+      <Header />
       {creditClass && (
         <>
           <h3 className="mb-2 text-lg font-semibold">
