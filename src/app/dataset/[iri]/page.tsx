@@ -4,6 +4,7 @@ import DatasetInfo from "@/components/DatasetInfo";
 import { Reference } from "../../../utils/types";
 import React from "react";
 import dayjs from "dayjs";
+import Header from "@/components/Header";
 
 interface DatasetProps {
   params: {
@@ -96,6 +97,7 @@ export default async function Dataset({ params }: DatasetProps) {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
+      <Header />
       <DatasetInfo
         iri={iri}
         usedIn={usedIn}

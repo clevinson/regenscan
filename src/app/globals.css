@@ -3,36 +3,121 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  /* Base colors */
+  --foreground-rgb: 255, 255, 255;
+  --background-rgb: 0, 30, 25; /* Darker grey-green background */
+
+  /* Primary colors */
+  --primary-green: 34, 40, 36; /* Darker muted sage green */
+  --primary-grey: 28, 30, 29; /* Deeper grey with green undertone */
+
+  /* Accent colors */
+  --accent-yellow: 184, 157, 79; /* Muted golden/auburn */
+  --accent-blue: 96, 165, 178; /* Soft blue-grey */
+
+  /* Text colors */
+  --text-primary: 220, 220, 215; /* Off-white with green undertone */
+  --text-secondary: 156, 166, 160; /* Muted sage grey */
+
+  /* Highlight colors for interactive states */
+  --highlight-green: 44, 51, 46; /* Slightly lighter green for hover states */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer base {
+  html {
+    @apply antialiased;
   }
-}
 
-body {
-  @apply min-h-screen;
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  body {
+    @apply min-h-screen text-base;
+    color: rgb(var(--text-primary));
+    background: rgb(var(--background-rgb));
+  }
+
+  a {
+    @apply transition-all duration-200;
+    color: rgb(var(--accent-blue));
+  }
+
+  a:hover {
+    color: rgb(var(--accent-yellow));
+    @apply opacity-90;
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+
+  .bg-primary-green {
+    background-color: rgb(var(--primary-green));
+  }
+
+  .bg-primary-grey {
+    background-color: rgb(var(--primary-grey));
+  }
+
+  .bg-highlight {
+    background-color: rgb(var(--highlight-green));
+  }
+
+  .text-accent-yellow {
+    color: rgb(var(--accent-yellow));
+  }
+
+  .text-accent-blue {
+    color: rgb(var(--accent-blue));
+  }
+
+  .text-secondary {
+    color: rgb(var(--text-secondary));
+  }
+
+  .border-primary-green {
+    border-color: rgb(var(--primary-green));
+  }
 }
 
+/* Interactive elements */
 .transition-all {
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Hover effects */
+@layer utilities {
+  .hover-accent {
+    @apply hover:text-accent-yellow transition-all duration-200;
+  }
+
+  .hover-opacity {
+    @apply hover:opacity-90 transition-all duration-200;
+  }
+
+  .hover-highlight {
+    @apply hover:bg-highlight transition-all duration-200;
+  }
+
+  .hover-glow {
+    @apply hover:shadow-[0_0_8px_rgba(184,157,79,0.2)] transition-all duration-200;
+  }
+}
+
+/* Custom gradients */
+@layer utilities {
+  .gradient-green {
+    background: linear-gradient(
+      45deg,
+      rgb(var(--primary-grey)),
+      rgb(var(--primary-green))
+    );
+  }
+
+  .gradient-dark {
+    background: linear-gradient(
+      to bottom,
+      rgb(var(--background-rgb)),
+      rgb(var(--primary-grey))
+    );
+  }
 }

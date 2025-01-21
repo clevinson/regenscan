@@ -7,6 +7,7 @@ import AddressLink from "@/components/AddressLink";
 import { InfoTable, KeyColumn, ValueColumn } from "@/components/InfoTable";
 import JsonViewer from "@/components/JsonViewer";
 import ResolvedMetadata from "@/components/ResolvedMetadata";
+import Header from "@/components/Header";
 
 interface ProjectPageProps {
   params: {
@@ -34,6 +35,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
+      <Header />
       {project && (
         <>
           <h3 className="mb-2 text-lg font-semibold">Project: {project.id}</h3>

@@ -37,7 +37,7 @@ const DatasetInfo: React.FC<DatasetInfoProps> = ({
 
   return (
     <div
-      className={`bg-white shadow-lg rounded-lg p-6 mb-8 transition-all ${
+      className={`bg-gray-200 shadow-lg rounded-lg p-6 mb-8 transition-all ${
         isCollapsed ? "overflow-hidden" : ""
       }`}
     >

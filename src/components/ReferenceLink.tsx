@@ -6,24 +6,20 @@ interface ReferenceProps {
 }
 
 const ReferenceLink = ({ reference }: ReferenceProps) => {
-  let backgroundColor = "";
+  let backgroundColor = "bg-green-200";
   let refTypeName = "";
   let href = "";
 
   if (reference.refType === "project") {
-    backgroundColor = "bg-orange-400";
     refTypeName = "Project";
     href = `/project/${reference.id}`;
   } else if (reference.refType === "creditClass") {
-    backgroundColor = "bg-green-300";
     refTypeName = "Credit Class";
     href = `/class/${reference.id}`;
   } else if (reference.refType === "creditBatch") {
-    backgroundColor = "bg-cyan-400";
     refTypeName = "Credit Batch";
     href = `/batch/${reference.id}`;
   } else {
-    backgroundColor = "bg-gray-400";
     refTypeName = "Reference";
     href = "#";
   }

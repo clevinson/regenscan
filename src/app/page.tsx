@@ -8,6 +8,7 @@ import {
   classRegex,
   batchRegex,
 } from "@/utils/constants";
+import SearchBar from "@/components/Search";
 
 export default function Home() {
   const [iri, setIri] = useState<string>("");
@@ -29,25 +30,11 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-      <h1 className="text-4xl font-bold mb-8">
+    <div className="flex flex-col items-center justify-center h-screen">
+      <h1 className="text-4xl font-bold mb-8 text-[rgb(var(--text-primary))]">
         Regen Network Dataset Explorer
       </h1>
-      <form onSubmit={handleSubmit} className="flex text-xs items-center">
-        <input
-          type="text"
-          value={iri}
-          onChange={(e) => setIri(e.target.value)}
-          placeholder="Enter Regen IRI, Project ID, Credit Class ID, or Batch ID"
-          className="px-4 py-2 w-[480px] border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-        />
-        <button
-          type="submit"
-          className="px-4 py-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-        >
-          Explore Dataset
-        </button>
-      </form>
+      <SearchBar />
     </div>
   );
 }
