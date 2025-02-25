@@ -20,9 +20,7 @@ const MainStats: React.FC<MainStatsProps> = () => {
   useEffect(() => {
     async function fetchCreditTypesCount() {
       try {
-        const response = await axios.get(
-          "http://mainnet.regen.network:1317/regen/ecocredit/v1/credit-types"
-        );
+        const response = await axios.get("/api/credit-types");
         const creditTypes = response.data.credit_types;
         setCreditTypesCount(creditTypes.length);
       } catch (error) {
@@ -32,9 +30,7 @@ const MainStats: React.FC<MainStatsProps> = () => {
 
     async function fetchCreditClassesCount() {
       try {
-        const response = await axios.get(
-          "http://mainnet.regen.network:1317/regen/ecocredit/v1/classes"
-        );
+        const response = await axios.get("/api/credit-classes");
         setCreditClassesCount(response.data.classes.length);
       } catch (error) {
         console.error("Error fetching credit classes count:", error);
@@ -43,9 +39,7 @@ const MainStats: React.FC<MainStatsProps> = () => {
 
     async function fetchProjectsCount() {
       try {
-        const response = await axios.get(
-          "http://mainnet.regen.network:1317/regen/ecocredit/v1/projects"
-        );
+        const response = await axios.get("/api/projects");
         setProjectsCount(response.data.projects.length);
       } catch (error) {
         console.error("Error fetching projects count:", error);
@@ -54,9 +48,7 @@ const MainStats: React.FC<MainStatsProps> = () => {
 
     async function fetchCreditBatchesCount() {
       try {
-        const response = await axios.get(
-          "http://mainnet.regen.network:1317/regen/ecocredit/v1/batches"
-        );
+        const response = await axios.get("/api/batches");
         setCreditBatchesCount(response.data.batches.length);
       } catch (error) {
         console.error("Error fetching credit batches count:", error);

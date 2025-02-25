@@ -50,9 +50,7 @@ const StatsPage: React.FC = () => {
   useEffect(() => {
     async function fetchCreditTypesCount() {
       try {
-        const response = await axios.get(
-          "http://mainnet.regen.network:1317/regen/ecocredit/v1/credit-types"
-        );
+        const response = await axios.get("/api/credit-types");
         const creditTypes = response.data.credit_types;
         setCreditTypesCount(creditTypes.length);
 
@@ -71,9 +69,7 @@ const StatsPage: React.FC = () => {
 
     async function fetchCreditClassesCount() {
       try {
-        const response = await axios.get(
-          "http://mainnet.regen.network:1317/regen/ecocredit/v1/classes"
-        );
+        const response = await axios.get("/api/credit-classes");
         setCreditClassesCount(response.data.classes.length);
       } catch (error) {
         console.error("Error fetching credit classes count:", error);
@@ -82,9 +78,7 @@ const StatsPage: React.FC = () => {
 
     async function fetchProjectsCount() {
       try {
-        const response = await axios.get(
-          "http://mainnet.regen.network:1317/regen/ecocredit/v1/projects"
-        );
+        const response = await axios.get("/api/projects");
         setProjectsCount(response.data.projects.length);
       } catch (error) {
         console.error("Error fetching projects count:", error);
@@ -93,9 +87,7 @@ const StatsPage: React.FC = () => {
 
     async function fetchCreditBatchesCount() {
       try {
-        const response = await axios.get(
-          "http://mainnet.regen.network:1317/regen/ecocredit/v1/batches"
-        );
+        const response = await axios.get("/api/batches");
         setCreditBatchesCount(response.data.batches.length);
       } catch (error) {
         console.error("Error fetching credit batches count:", error);
@@ -104,16 +96,14 @@ const StatsPage: React.FC = () => {
 
     async function fetchAggregatedSupplies() {
       try {
-        const batchesResponse = await axios.get(
-          "http://mainnet.regen.network:1317/regen/ecocredit/v1/batches"
-        );
+        const batchesResponse = await axios.get("/api/batches");
         const batches = batchesResponse.data.batches;
 
         const supplies: AggregatedSupply = {};
 
         for (const batch of batches) {
           const supplyResponse = await axios.get(
-            `http://mainnet.regen.network:1317/regen/ecocredit/v1/batches/${batch.denom}/supply`
+            `/api/batch-supply?denom=${batch.denom}`
           );
           const supply = supplyResponse.data;
 
