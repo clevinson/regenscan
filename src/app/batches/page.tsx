@@ -1,5 +1,6 @@
+"use client";
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import { Table, TableRow, TableCell } from "@/components/GenericTable";
 import Link from "next/link";
@@ -9,23 +10,33 @@ interface Batch {
   issuance_date: string;
 }
 
-export default async function AllBatchesPage() {
-  let batches: Batch[] = [];
-  let error: string | null = null;
+const AllBatchesPage: React.FC = () => {
+  const [batches, setBatches] = useState<Batch[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  try {
-    const response = await axios.get("/api/batches");
-    batches = response.data.batches;
-  } catch (err) {
-    error = "Error fetching batches.";
-  }
+  useEffect(() => {
+    async function fetchBatches() {
+      try {
+        const response = await axios.get("/api/batches");
+        setBatches(response.data.batches);
+        setLoading(false);
+      } catch (err) {
+        console.log(err);
+        setError("Error fetching batches.");
+        setLoading(false);
+      }
+    }
+
+    fetchBatches();
+  }, []);
 
   if (error) return <div>{error}</div>;
-  if (!batches.length) return <div>Loading...</div>;
+  if (loading) return <div>Loading...</div>;
 
   return (
     <div className="h-screen">
-      <div className="max-w-4xl mx-auto p-6 h-full flex flex-col">
+      <div className="max-w-4xl mx-auto p-6 h-max flex flex-col">
         <Header />
         <h3 className="mb-4 text-lg font-semibold">All Batches</h3>
         <Table headers={["Denom", "Issuance Date"]}>
@@ -41,4 +52,6 @@ export default async function AllBatchesPage() {
       </div>
     </div>
   );
-}
+};
+
+export default AllBatchesPage;

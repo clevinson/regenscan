@@ -8,6 +8,7 @@ export async function GET() {
     );
     return NextResponse.json(response.data);
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
       { error: "Error fetching batches" },
       { status: 500 }
