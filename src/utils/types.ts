@@ -20,3 +20,14 @@ export interface CreditClass {
   credit_type_abbrev: string;
   issuers: string[];
 }
+
+export interface CreditBatch {
+  denom: string;
+  issuer: string;
+  project_id: string;
+  start_date: string;
+  end_date: string;
+  issuance_date: string;
+  open: true;
+  metadata: string;
+}

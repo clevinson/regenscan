@@ -37,14 +37,14 @@ const DatasetInfo: React.FC<DatasetInfoProps> = ({
 
   return (
     <div
-      className={`bg-gray-200 shadow-lg rounded-lg p-6 mb-8 transition-all ${
+      className={`bg-gray-100 shadow-lg rounded-lg p-6 mb-8 transition-all ${
         isCollapsed ? "overflow-hidden" : ""
       }`}
     >
       <div className="flex justify-between items-center">
         <div className="text-l">
-          <h3 className="font-semibold text-gray-700 mr-2">Regen IRI</h3>
-          <p className="font-medium text-blue-600 break-words">{iri}</p>
+          <h3 className="font-medium text-gray-700 break-words">{iri}</h3>
+          <h3 className="text-sm text-gray-400 mr-2">Regen IRI</h3>
         </div>
         <button
           onClick={toggleCollapse}
@@ -58,7 +58,9 @@ const DatasetInfo: React.FC<DatasetInfoProps> = ({
         <>
           {usedIn && usedIn.length > 0 && (
             <div className="mt-4 flex flex-row pb-6 border-b border-gray-200">
-              <h3 className="font-semibold text-gray-700 mr-2">Used In:</h3>
+              <h3 className="font-semibold text-gray-700 mr-2">
+                Referenced in:
+              </h3>
               <div className="flex flex-wrap">
                 {usedIn.map((reference: Reference, index: number) => (
                   <ReferenceLink key={index} reference={reference} />
@@ -70,26 +72,26 @@ const DatasetInfo: React.FC<DatasetInfoProps> = ({
           <div className="pt-6">
             <div className="mb-4 flex justify-between border-b border-gray-200 pb-6">
               <div className="w-1/2">
-                <h3 className="text-sm w-1/2 font-semibold text-gray-700">
+                <h3 className="text-sm w-1/2 font-semibold text-gray-500">
                   Anchor Timestamp
                 </h3>
-                <p className="text-base font-medium text-gray-900 mt-1">
+                <p className="text-base font-medium text-gray-700 mt-1">
                   {anchorTimestamp || "None"}
                 </p>
               </div>
 
               <div className="w-1/2">
-                <h3 className="text-sm font-semibold text-gray-700">
+                <h3 className="text-sm font-semibold text-gray-500">
                   Attestations
                 </h3>
-                <p className="text-base font-medium text-gray-900 mt-1">
+                <p className="text-base font-medium text-gray-700 mt-1">
                   {attestations || "None"}
                 </p>
               </div>
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold text-gray-700">Resolvers</h3>
+              <h3 className="text-sm font-semibold text-gray-500">Resolvers</h3>
               <div className="text-base font-medium text-gray-900 mt-1">
                 {resolvers
                   ? resolvers.map((resolver: string, index: number) => (
@@ -99,7 +101,7 @@ const DatasetInfo: React.FC<DatasetInfoProps> = ({
                           href={`${resolver}${iri}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-600 hover:text-blue-800 w-4"
+                          className="text-blue-400 w-4"
                         >
                           <FontAwesomeIcon icon={faShareSquare} />
                         </a>

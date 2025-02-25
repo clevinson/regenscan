@@ -7,6 +7,7 @@ import {
   projectRegex,
   classRegex,
   batchRegex,
+  typeRegex,
 } from "@/utils/constants";
 
 export default function SearchBar() {
@@ -14,9 +15,12 @@ export default function SearchBar() {
   const router = useRouter();
 
   const handleSubmit = (e: FormEvent) => {
+    console.log("submitting");
     e.preventDefault();
     if (iri) {
-      if (iri.match(regenIRIRegex)) {
+      if (iri.match(typeRegex)) {
+        router.push(`/credit-type/${iri}`);
+      } else if (iri.match(regenIRIRegex)) {
         router.push(`/dataset/${iri}`);
       } else if (iri.match(projectRegex)) {
         router.push(`/project/${iri}`);

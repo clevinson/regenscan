@@ -1,5 +1,6 @@
 import axios from "axios";
 import { CreditClass } from "@/utils/types";
+import ProjectsTable from "@/components/ProjectsTable";
 import React from "react";
 import MetadataLink from "@/components/MetadataLink";
 import AddressLink from "@/components/AddressLink";
@@ -19,22 +20,29 @@ export default async function CreditClassPage({
 }: CreditClassPageProps) {
   let { id } = params;
   let creditClass: CreditClass | null = null;
+  let projects: Project[] | null = null;
   let error: string | null = null;
 
   try {
-    const [creditClassResponse, classIssuersResponse] = await Promise.all([
-      axios.get(
-        `http://mainnet.regen.network:1317/regen/ecocredit/v1/class/${id}`
-      ),
-      axios.get(
-        `http://mainnet.regen.network:1317/regen/ecocredit/v1/class-issuers/${id}`
-      ),
-    ]);
+    const [creditClassResponse, classIssuersResponse, projectsResponse] =
+      await Promise.all([
+        axios.get(
+          `http://mainnet.regen.network:1317/regen/ecocredit/v1/class/${id}`
+        ),
+        axios.get(
+          `http://mainnet.regen.network:1317/regen/ecocredit/v1/class-issuers/${id}`
+        ),
+        axios.get(
+          `http://mainnet.regen.network:1317/regen/ecocredit/v1/classes/${id}/projects`
+        ),
+      ]);
 
     creditClass = creditClassResponse.data["class"];
     creditClass
       ? (creditClass.issuers = classIssuersResponse.data["issuers"])
       : null;
+
+    projects = projectsResponse.data.projects;
   } catch (err) {
     error = "Error fetching dataset. Please check the IRI.";
   }
@@ -43,38 +51,56 @@ export default async function CreditClassPage({
   if (!creditClass) return <div>Loading...</div>;
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <Header />
-      {creditClass && (
-        <>
-          <h3 className="mb-2 text-lg font-semibold">
-            Credit Class: {creditClass.id}
-          </h3>
-          <div className="text-xs max-h-96 overflow-y-auto p-4 bg-gray-50 rounded-lg border border-gray-300">
-            <InfoTable>
-              <KeyColumn>Credit Type:</KeyColumn>
-              <ValueColumn>{creditClass.credit_type_abbrev}</ValueColumn>
-              <KeyColumn>Admin:</KeyColumn>
-              <ValueColumn>
-                <AddressLink address={creditClass.admin} />
-              </ValueColumn>
-              <KeyColumn>Issuers:</KeyColumn>
-              <ValueColumn>
-                <SeeMore>
-                  {creditClass.issuers.map((issuer) => {
-                    return <AddressLink address={issuer} />;
-                  })}
-                </SeeMore>
-              </ValueColumn>
-              <KeyColumn>Metadata:</KeyColumn>
-              <ValueColumn>
-                <MetadataLink iri={creditClass.metadata} />
-              </ValueColumn>
-            </InfoTable>
+    <div className="h-screen">
+      <div className="max-w-4xl mx-auto p-6 h-full flex flex-col">
+        <Header />
+        {creditClass && (
+          <div className="h-full flex flex-col">
+            <h3 className="mb-2 text-lg font-semibold">
+              Credit Class: {creditClass.id}
+            </h3>
+            <div className="text-xs p-4 bg-gray-50 rounded-lg border border-gray-300">
+              <InfoTable>
+                <KeyColumn>Credit Type:</KeyColumn>
+                <ValueColumn>
+                  <a
+                    className="text-blue-400"
+                    href={`/credit-type/${creditClass.credit_type_abbrev}`}
+                  >
+                    {creditClass.credit_type_abbrev}
+                  </a>
+                </ValueColumn>
+                <KeyColumn>Admin:</KeyColumn>
+                <ValueColumn>
+                  <AddressLink address={creditClass.admin} />
+                </ValueColumn>
+                <KeyColumn>Issuers:</KeyColumn>
+                <ValueColumn>
+                  <SeeMore>
+                    {creditClass.issuers.map((issuer) => {
+                      return <AddressLink address={issuer} />;
+                    })}
+                  </SeeMore>
+                </ValueColumn>
+                <KeyColumn>Metadata:</KeyColumn>
+                <ValueColumn>
+                  <MetadataLink iri={creditClass.metadata} />
+                </ValueColumn>
+              </InfoTable>
+            </div>
+            <h3 className="mt-6 text-lg font-semibold">Projects</h3>
+            <p className="mb-2 text-sm text-gray-400">
+              The following projects are registered with the above credit class
+            </p>
+            <div className="h-max">
+              <ProjectsTable projects={projects} />
+            </div>
+            <div className="h-[60vh] mt-4">
+              <ResolvedMetadata iri={creditClass.metadata} />
+            </div>
           </div>
-          <ResolvedMetadata iri={creditClass.metadata} />
-        </>
-      )}
+        )}
+      </div>
     </div>
   );
 }

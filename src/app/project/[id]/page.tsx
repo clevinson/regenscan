@@ -5,9 +5,10 @@ import MetadataLink from "@/components/MetadataLink";
 import CreditClassLink from "@/components/CreditClassLink";
 import AddressLink from "@/components/AddressLink";
 import { InfoTable, KeyColumn, ValueColumn } from "@/components/InfoTable";
-import JsonViewer from "@/components/JsonViewer";
 import ResolvedMetadata from "@/components/ResolvedMetadata";
 import Header from "@/components/Header";
+import { Table, TableRow, TableCell } from "@/components/GenericTable";
+import Link from "next/link";
 
 interface ProjectPageProps {
   params: {
@@ -15,17 +16,29 @@ interface ProjectPageProps {
   };
 }
 
+interface Batch {
+  denom: string;
+  issuance_date: string;
+}
+
 export default async function ProjectPage({ params }: ProjectPageProps) {
   let { id } = params;
   let project: Project | null = null;
+  let batches: Batch[] = [];
   let error: string | null = null;
 
   try {
-    const projectResponse = await axios.get(
-      `http://mainnet.regen.network:1317/regen/ecocredit/v1/project/${id}`
-    );
+    const [projectResponse, batchesResponse] = await Promise.all([
+      axios.get(
+        `http://mainnet.regen.network:1317/regen/ecocredit/v1/project/${id}`
+      ),
+      axios.get(
+        `http://mainnet.regen.network:1317/regen/ecocredit/v1/batches/project/${id}`
+      ),
+    ]);
 
     project = projectResponse.data["project"];
+    batches = batchesResponse.data.batches;
   } catch (err) {
     error = "Error fetching dataset. Please check the IRI.";
   }
@@ -59,6 +72,18 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <ValueColumn>{project.reference_id}</ValueColumn>
             </InfoTable>
           </div>
+          <h3 className="mt-6 text-lg font-semibold">Batches</h3>
+          <Table headers={["Denom", "Issuance Date"]}>
+            {batches.map((batch) => (
+              <TableRow key={batch.denom}>
+                <TableCell>
+                  <Link href={`/batch/${batch.denom}`}>{batch.denom}</Link>
+                </TableCell>
+                <TableCell>{batch.issuance_date}</TableCell>
+              </TableRow>
+            ))}
+          </Table>
+          <div className="mt-6"></div>
           <ResolvedMetadata iri={project.metadata} />
         </>
       )}
