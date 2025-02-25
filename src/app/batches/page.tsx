@@ -14,9 +14,7 @@ export default async function AllBatchesPage() {
   let error: string | null = null;
 
   try {
-    const response = await axios.get(
-      "http://mainnet.regen.network:1317/regen/ecocredit/v1/batches"
-    );
+    const response = await axios.get("/api/batches");
     batches = response.data.batches;
   } catch (err) {
     error = "Error fetching batches.";

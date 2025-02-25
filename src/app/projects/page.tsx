@@ -16,9 +16,7 @@ export default function ProjectsPage() {
   useEffect(() => {
     async function fetchProjects() {
       try {
-        const response = await axios.get(
-          "http://mainnet.regen.network:1317/regen/ecocredit/v1/projects"
-        );
+        const response = await axios.get("api/projects");
         setProjects(response.data.projects);
       } catch (error) {
         console.error("Error fetching projects:", error);

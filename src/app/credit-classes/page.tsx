@@ -15,9 +15,7 @@ export default function CreditClassesPage() {
   useEffect(() => {
     async function fetchCreditClasses() {
       try {
-        const response = await axios.get(
-          "http://mainnet.regen.network:1317/regen/ecocredit/v1/classes"
-        );
+        const response = await axios.get("/api/credit-classes");
         setCreditClasses(response.data.classes);
       } catch (error) {
         console.error("Error fetching credit classes:", error);

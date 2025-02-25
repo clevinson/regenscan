@@ -17,9 +17,7 @@ export default function CreditTypesPage() {
   useEffect(() => {
     async function fetchCreditTypes() {
       try {
-        const response = await axios.get(
-          "http://mainnet.regen.network:1317/regen/ecocredit/v1/credit-types"
-        );
+        const response = await axios.get("/api/credit-types");
         setCreditTypes(response.data.credit_types);
       } catch (error) {
         console.error("Error fetching credit types:", error);
