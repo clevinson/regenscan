@@ -101,7 +101,7 @@ const StatsPage: React.FC = () => {
 
         const supplies: AggregatedSupply = {};
 
-        for (const batch of batches) {
+        const supplyPromises = batches.map(async (batch: any) => {
           const supplyResponse = await axios.get(
             `/api/batch-supply?denom=${batch.denom}`
           );
@@ -126,9 +126,11 @@ const StatsPage: React.FC = () => {
             supplies[creditTypeAbbrev].cancelled_amount += parseFloat(
               supply.cancelled_amount
             );
-            setAggregatedSupplies(supplies);
           }
-        }
+        });
+
+        await Promise.all(supplyPromises);
+        setAggregatedSupplies(supplies);
       } catch (error) {
         console.error("Error fetching aggregated supplies:", error);
       }
