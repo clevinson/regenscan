@@ -5,7 +5,7 @@
 :root {
   /* Base colors */
   --foreground-rgb: 255, 255, 255;
-  --background-rgb: 0, 30, 25; /* Darker grey-green background */
+  --background-rgb: 0, 35, 30; /* Darker grey-green background */
 
   /* Primary colors */
   --primary-green: 34, 40, 36; /* Darker muted sage green */
@@ -40,7 +40,7 @@
   }
 
   a:hover {
-    color: rgb(var(--accent-yellow));
+    color: rgb(var(--accent-blue));
     @apply opacity-90;
   }
 }
@@ -81,13 +81,13 @@
 
 /* Interactive elements */
 .transition-all {
-  transition: all 0.2s ease-in-out;
+  transition: all 0.25s ease-in-out;
 }
 
 /* Hover effects */
 @layer utilities {
   .hover-accent {
-    @apply hover:text-accent-yellow transition-all duration-200;
+    @apply hover:text-accent-blue transition-all duration-200;
   }
 
   .hover-opacity {

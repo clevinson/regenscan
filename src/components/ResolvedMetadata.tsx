@@ -23,11 +23,11 @@ export default async function ResolvedMetadata({ iri }: ResolvedMetadataProps) {
   if (!metadata) return <div>Loading...</div>;
 
   return (
-    <>
-      <h3 className="my-2 text-lg font-semibold">Resolved Metadata:</h3>
-      <div className="text-xs max-h-96 overflow-y-auto p-4 bg-gray-50 rounded-lg border border-gray-300">
+    <div className="h-full">
+      <h3 className="my-2 text-lg font-semibold">Resolved Metadata</h3>
+      <div className="text-xs overflow-y-auto p-4 bg-gray-50 rounded-lg h-full border border-gray-300">
         <JsonViewer payload={metadata} />
       </div>
-    </>
+    </div>
   );
 }

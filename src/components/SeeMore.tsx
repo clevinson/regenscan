@@ -16,7 +16,10 @@ export default function SeeMore({ children }: SeeMoreProps) {
     <div className="space-y-1">
       {children[0]}
       {children.length > 1 && (
-        <button className="ml-2 text-blue-500" onClick={toggleExpanded}>
+        <button
+          className="ml-2 text-blue-400 hover-accent"
+          onClick={toggleExpanded}
+        >
           {expanded ? "– Show less" : "+ Show more"}
         </button>
       )}

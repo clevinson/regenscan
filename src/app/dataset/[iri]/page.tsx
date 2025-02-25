@@ -108,7 +108,7 @@ export default async function Dataset({ params }: DatasetProps) {
         resolvers={resolvers}
       />
 
-      <h3 className="mb-2 text-lg font-semibold">Dataset:</h3>
+      <h3 className="mb-2 text-lg font-semibold">Anchored Dataset</h3>
       <div className="text-xs max-h-96 overflow-y-auto p-4 bg-gray-50 rounded-lg border border-gray-300">
         <JsonViewer payload={dataset.payload} />
       </div>

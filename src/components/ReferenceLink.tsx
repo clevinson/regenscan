@@ -6,7 +6,7 @@ interface ReferenceProps {
 }
 
 const ReferenceLink = ({ reference }: ReferenceProps) => {
-  let backgroundColor = "bg-green-200";
+  let backgroundColor = "bg-gray-300";
   let refTypeName = "";
   let href = "";
 
@@ -27,7 +27,7 @@ const ReferenceLink = ({ reference }: ReferenceProps) => {
   return (
     <a
       href={href}
-      className={`inline-block px-2 py-1 border border-gray-300 rounded-xl ${backgroundColor} text-gray-600 text-xs font-semibold`}
+      className={`inline-block px-2 py-1 border border-gray-300 rounded-xl ${backgroundColor} text-xs font-semibold`}
     >
       {refTypeName}: {reference.id}
     </a>
