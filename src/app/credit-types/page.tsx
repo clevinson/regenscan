@@ -43,7 +43,7 @@ export default function CreditTypesPage() {
                 </Link>
               </TableCell>
               <TableCell>{creditType.name}</TableCell>
-              <TableCell className="max-w-24">{creditType.unit}</TableCell>
+              <TableCell>{creditType.unit}</TableCell>
             </TableRow>
           ))}
         </Table>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CreditClass } from "@/utils/types";
+import { CreditClass, Project } from "@/utils/types";
 import ProjectsTable from "@/components/ProjectsTable";
 import React from "react";
 import MetadataLink from "@/components/MetadataLink";
@@ -20,7 +20,7 @@ export default async function CreditClassPage({
 }: CreditClassPageProps) {
   let { id } = params;
   let creditClass: CreditClass | null = null;
-  let projects: Project[] | null = null;
+  let projects: Project[] = [];
   let error: string | null = null;
 
   try {
