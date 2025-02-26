@@ -184,7 +184,7 @@ const StatsPage: React.FC = () => {
           <div className="text-gray-500 cursor-pointer">
             <FontAwesomeIcon icon={faQuestionCircle} className="ml-1" />
           </div>
-          <div className="absolute bottom-full mb-2 hidden group-hover:block bg-gray-700 text-white text-xs w-max rounded py-1 px-2 max-w-[32rem]">
+          <div className="absolute bottom-full mb-2 hidden group-hover:block bg-gray-700 text-white text-xs w-max rounded-sm py-1 px-2 max-w-[32rem]">
             {creditType.unit.charAt(0).toUpperCase() + creditType.unit.slice(1)}
             <div className="absolute left-1.5 top-full w-0 h-0 border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-gray-700"></div>
           </div>

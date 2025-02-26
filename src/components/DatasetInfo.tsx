@@ -48,7 +48,7 @@ const DatasetInfo: React.FC<DatasetInfoProps> = ({
         </div>
         <button
           onClick={toggleCollapse}
-          className="text-gray-700 hover:text-gray-900 focus:outline-none"
+          className="text-gray-700 hover:text-gray-900 focus:outline-hidden"
         >
           <FontAwesomeIcon icon={isCollapsed ? faChevronDown : faChevronUp} />
         </button>

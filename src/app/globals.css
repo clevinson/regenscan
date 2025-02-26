@@ -1,26 +1,104 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-:root {
-  /* Base colors */
-  --foreground-rgb: 255, 255, 255;
-  --background-rgb: 0, 35, 30; /* Darker grey-green background */
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
 
-  /* Primary colors */
-  --primary-green: 34, 40, 36; /* Darker muted sage green */
-  --primary-grey: 28, 30, 29; /* Deeper grey with green undertone */
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
 
-  /* Accent colors */
-  --accent-yellow: 184, 157, 79; /* Muted golden/auburn */
-  --accent-blue: 96, 165, 178; /* Soft blue-grey */
+@utility text-balance {
+  text-wrap: balance;
+}
 
-  /* Text colors */
-  --text-primary: 220, 220, 215; /* Off-white with green undertone */
-  --text-secondary: 156, 166, 160; /* Muted sage grey */
+@utility bg-primary-green {
+  background-color: rgb(var(--primary-green));
+}
 
-  /* Highlight colors for interactive states */
-  --highlight-green: 44, 51, 46; /* Slightly lighter green for hover states */
+@utility bg-primary-grey {
+  background-color: rgb(var(--primary-grey));
+}
+
+@utility bg-highlight {
+  background-color: rgb(var(--highlight-green));
+}
+
+@utility text-accent-yellow {
+  color: rgb(var(--accent-yellow));
+}
+
+@utility text-accent-blue {
+  color: rgb(var(--accent-blue));
+}
+
+@utility text-secondary {
+  color: rgb(var(--text-secondary));
+}
+
+@utility border-primary-green {
+  border-color: rgb(var(--primary-green));
+}
+@utility hover-accent {
+  @apply hover:text-accent-blue transition-all duration-200;
+}
+@utility hover-opacity {
+  @apply hover:opacity-90 transition-all duration-200;
+}
+@utility hover-highlight {
+  @apply hover:bg-highlight transition-all duration-200;
+}
+@utility hover-glow {
+  @apply hover:shadow-[0_0_8px_rgba(184,157,79,0.2)] transition-all duration-200;
+}
+
+/* Custom gradients */
+@utility gradient-green {
+  background: linear-gradient(
+    45deg,
+    rgb(var(--primary-grey)),
+    rgb(var(--primary-green))
+  );
+}
+@utility gradient-dark {
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--background-rgb)),
+    rgb(var(--primary-grey))
+  );
+}
+
+@layer utilities {
+  :root {
+    /* Base colors */
+    --foreground-rgb: 255, 255, 255;
+    --background-rgb: 0, 35, 30; /* Darker grey-green background */
+
+    /* Primary colors */
+    --primary-green: 34, 40, 36; /* Darker muted sage green */
+    --primary-grey: 28, 30, 29; /* Deeper grey with green undertone */
+
+    /* Accent colors */
+    --accent-yellow: 184, 157, 79; /* Muted golden/auburn */
+    --accent-blue: 96, 165, 178; /* Soft blue-grey */
+
+    /* Text colors */
+    --text-primary: 220, 220, 215; /* Off-white with green undertone */
+    --text-secondary: 156, 166, 160; /* Muted sage grey */
+
+    /* Highlight colors for interactive states */
+    --highlight-green: 44, 51, 46; /* Slightly lighter green for hover states */
+  }
 }
 
 @layer base {
@@ -46,78 +124,10 @@
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  /* Interactive elements */
+  .transition-all {
+    transition: all 0.25s ease-in-out;
   }
 
-  .bg-primary-green {
-    background-color: rgb(var(--primary-green));
-  }
-
-  .bg-primary-grey {
-    background-color: rgb(var(--primary-grey));
-  }
-
-  .bg-highlight {
-    background-color: rgb(var(--highlight-green));
-  }
-
-  .text-accent-yellow {
-    color: rgb(var(--accent-yellow));
-  }
-
-  .text-accent-blue {
-    color: rgb(var(--accent-blue));
-  }
-
-  .text-secondary {
-    color: rgb(var(--text-secondary));
-  }
-
-  .border-primary-green {
-    border-color: rgb(var(--primary-green));
-  }
-}
-
-/* Interactive elements */
-.transition-all {
-  transition: all 0.25s ease-in-out;
-}
-
-/* Hover effects */
-@layer utilities {
-  .hover-accent {
-    @apply hover:text-accent-blue transition-all duration-200;
-  }
-
-  .hover-opacity {
-    @apply hover:opacity-90 transition-all duration-200;
-  }
-
-  .hover-highlight {
-    @apply hover:bg-highlight transition-all duration-200;
-  }
-
-  .hover-glow {
-    @apply hover:shadow-[0_0_8px_rgba(184,157,79,0.2)] transition-all duration-200;
-  }
-}
-
-/* Custom gradients */
-@layer utilities {
-  .gradient-green {
-    background: linear-gradient(
-      45deg,
-      rgb(var(--primary-grey)),
-      rgb(var(--primary-green))
-    );
-  }
-
-  .gradient-dark {
-    background: linear-gradient(
-      to bottom,
-      rgb(var(--background-rgb)),
-      rgb(var(--primary-grey))
-    );
-  }
+  /* Hover effects */
 }
