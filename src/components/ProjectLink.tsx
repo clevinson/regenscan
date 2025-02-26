@@ -5,11 +5,7 @@ interface ProjectLinkProps {
 }
 
 const ProjectLink = ({ id }: ProjectLinkProps) => {
-  return (
-    <a className="text-blue-400" href={`/project/${id}`}>
-      {id}
-    </a>
-  );
+  return <a href={`/project/${id}`}>{id}</a>;
 };
 
 export default ProjectLink;

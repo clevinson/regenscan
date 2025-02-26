@@ -89,24 +89,26 @@ const MainStats: React.FC<MainStatsProps> = () => {
   ];
 
   return (
-    <div className="max-w-3/4 w-[42rem] grid grid-cols-1 md:grid-cols-2 gap-4">
-      {stats.map((stat, index) => (
-        <div key={index} className="relative">
-          <InfoStats stats={[stat]} />
-          {stat.value !== "Loading..." && stat.link && (
-            <Link
-              href={stat.link}
-              className="absolute top-4 right-6 text-blue-500 flex items-center"
-            >
-              View all{" "}
-              <FontAwesomeIcon
-                icon={faArrowUpRightFromSquare}
-                className="ml-1"
-              />
-            </Link>
-          )}
-        </div>
-      ))}
+    <div className="max-w-4xl w-2xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {stats.map((stat, index) => (
+          <div key={index} className="relative">
+            <InfoStats stats={[stat]} />
+            {stat.value !== "Loading..." && stat.link && (
+              <Link
+                href={stat.link}
+                className="absolute top-4 right-6 flex items-center"
+              >
+                View all{" "}
+                <FontAwesomeIcon
+                  icon={faArrowUpRightFromSquare}
+                  className="ml-1"
+                />
+              </Link>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

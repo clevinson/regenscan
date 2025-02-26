@@ -5,11 +5,7 @@ interface CreditClassLinkProps {
 }
 
 const CreditClassLink = ({ id }: CreditClassLinkProps) => {
-  return (
-    <a className="text-blue-400" href={`/class/${id}`}>
-      {id}
-    </a>
-  );
+  return <a href={`/class/${id}`}>{id}</a>;
 };
 
 export default CreditClassLink;

@@ -36,7 +36,7 @@ const AllBatchesPage: React.FC = () => {
 
   return (
     <div className="h-screen">
-      <div className="max-w-4xl mx-auto p-6 h-max flex flex-col">
+      <div className="max-w-4xl mx-auto p-6 h-full flex flex-col">
         <Header />
         <h3 className="mb-4 text-lg font-semibold">All Batches</h3>
         <Table headers={["Denom", "Issuance Date"]}>

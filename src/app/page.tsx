@@ -41,7 +41,7 @@ export default function Home() {
           <Link href="/about">About</Link>
         </div>
       </header>
-      <div className="flex flex-col items-center justify-center flex-grow">
+      <div className="flex flex-col items-center justify-center grow">
         <h1 className="text-4xl font-bold mb-8 text-[rgb(var(--text-primary))]">
           Regen Network Dataset Explorer
         </h1>

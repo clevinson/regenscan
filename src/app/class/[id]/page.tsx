@@ -63,10 +63,7 @@ export default async function CreditClassPage({
               <InfoTable>
                 <KeyColumn>Credit Type:</KeyColumn>
                 <ValueColumn>
-                  <a
-                    className="text-blue-400"
-                    href={`/credit-type/${creditClass.credit_type_abbrev}`}
-                  >
+                  <a href={`/credit-type/${creditClass.credit_type_abbrev}`}>
                     {creditClass.credit_type_abbrev}
                   </a>
                 </ValueColumn>
