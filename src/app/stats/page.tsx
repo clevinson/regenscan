@@ -231,7 +231,7 @@ const StatsPage: React.FC = () => {
               {stat.value !== "Loading..." && stat.link && (
                 <Link
                   href={stat.link}
-                  className="absolute top-2 right-3 text-blue-500 flex items-center"
+                  className="absolute top-2 right-3 flex items-center"
                 >
                   View all{" "}
                   <FontAwesomeIcon

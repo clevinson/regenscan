@@ -5,11 +5,7 @@ interface MetadataLinkProps {
 }
 
 const MetadataLink = ({ iri }: MetadataLinkProps) => {
-  return (
-    <a className="text-blue-400 " href={`/dataset/${iri}`}>
-      {iri}
-    </a>
-  );
+  return <a href={`/dataset/${iri}`}>{iri}</a>;
 };
 
 export default MetadataLink;
