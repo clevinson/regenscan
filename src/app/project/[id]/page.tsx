@@ -7,6 +7,7 @@ import AddressLink from "@/components/AddressLink";
 import { InfoTable, KeyColumn, ValueColumn } from "@/components/InfoTable";
 import ResolvedMetadata from "@/components/ResolvedMetadata";
 import { Table, TableRow, TableCell } from "@/components/GenericTable";
+import { formatTimestamp } from "@/utils/utils";
 import Link from "next/link";
 
 interface ProjectPageProps {
@@ -77,7 +78,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 <TableCell>
                   <Link href={`/batch/${batch.denom}`}>{batch.denom}</Link>
                 </TableCell>
-                <TableCell>{batch.issuance_date}</TableCell>
+                <TableCell>{formatTimestamp(batch.issuance_date)}</TableCell>
               </TableRow>
             ))}
           </Table>

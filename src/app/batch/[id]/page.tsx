@@ -7,6 +7,7 @@ import ResolvedMetadata from "@/components/ResolvedMetadata";
 import { CreditBatch } from "@/utils/types";
 import ProjectLink from "@/components/ProjectLink";
 import InfoStats from "@/components/InfoStats";
+import { formatTimestamp } from "@/utils/utils";
 
 interface CreditBatchPageProps {
   params: {
@@ -64,7 +65,7 @@ export default async function CreditBatchPage({
           <h3 className="mb-2 text-lg font-semibold">
             Credit Batch: {creditBatch.denom}
           </h3>
-          <div className="text-xs p-4 bg-gray-50 rounded-lg border border-gray-300">
+          <div className="text-xs p-4 bg-gray-50 rounded-lg border border-gray-300 overflow-x-hidden">
             <InfoTable>
               <KeyColumn>Issuer:</KeyColumn>
               <ValueColumn>
@@ -75,11 +76,15 @@ export default async function CreditBatchPage({
                 {<ProjectLink id={creditBatch.project_id} />}
               </ValueColumn>
               <KeyColumn>Start Date:</KeyColumn>
-              <ValueColumn>{creditBatch.start_date}</ValueColumn>
+              <ValueColumn>
+                {formatTimestamp(creditBatch.start_date)}
+              </ValueColumn>
               <KeyColumn>End Date:</KeyColumn>
-              <ValueColumn>{creditBatch.end_date}</ValueColumn>
+              <ValueColumn>{formatTimestamp(creditBatch.end_date)}</ValueColumn>
               <KeyColumn>Issuance Date:</KeyColumn>
-              <ValueColumn>{creditBatch.issuance_date}</ValueColumn>
+              <ValueColumn>
+                {formatTimestamp(creditBatch.issuance_date)}
+              </ValueColumn>
               <KeyColumn>Open:</KeyColumn>
               <ValueColumn>{creditBatch.open ? "Yes" : "No"}</ValueColumn>
               <KeyColumn>Metadata:</KeyColumn>

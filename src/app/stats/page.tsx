@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import InfoStats from "@/components/InfoStats";
 import Layout from "@/components/Layout";
@@ -46,6 +46,9 @@ const StatsPage: React.FC = () => {
   }>({});
   const [aggregatedSupplies, setAggregatedSupplies] =
     useState<AggregatedSupply>({});
+  const [tooltipVisible, setTooltipVisible] = useState<string | null>(null);
+
+  const tooltipRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     async function fetchCreditTypesCount() {
@@ -145,7 +148,25 @@ const StatsPage: React.FC = () => {
     }
 
     fetchData();
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        tooltipRef.current &&
+        !tooltipRef.current.contains(event.target as Node)
+      ) {
+        setTooltipVisible(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
+
+  const handleTooltipToggle = (abbrev: string) => {
+    setTooltipVisible((prev) => (prev === abbrev ? null : abbrev));
+  };
 
   const stats = [
     {
@@ -181,13 +202,22 @@ const StatsPage: React.FC = () => {
           .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
           .join(" ")}
         <div className="ml-2 relative group">
-          <div className="text-gray-500 cursor-pointer">
+          <div
+            className="text-gray-500 cursor-pointer"
+            onClick={() => handleTooltipToggle(abbrev)}
+          >
             <FontAwesomeIcon icon={faQuestionCircle} className="ml-1" />
           </div>
-          <div className="absolute bottom-full mb-2 hidden group-hover:block bg-gray-700 text-white text-xs w-max rounded-sm py-1 px-2 max-w-[32rem]">
-            {creditType.unit.charAt(0).toUpperCase() + creditType.unit.slice(1)}
-            <div className="absolute left-1.5 top-full w-0 h-0 border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-gray-700"></div>
-          </div>
+          {tooltipVisible === abbrev && (
+            <div
+              ref={tooltipRef}
+              className="absolute bottom-full mb-2 bg-gray-700 text-white text-xs w-max rounded-sm py-1 px-2 max-w-[32rem]"
+            >
+              {creditType.unit.charAt(0).toUpperCase() +
+                creditType.unit.slice(1)}
+              <div className="absolute left-1.5 top-full w-0 h-0 border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-gray-700"></div>
+            </div>
+          )}
         </div>
       </h4>
       <InfoStats

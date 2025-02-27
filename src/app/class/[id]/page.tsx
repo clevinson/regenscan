@@ -53,7 +53,7 @@ export default async function CreditClassPage({
   return (
     <Layout>
       {creditClass && (
-        <div className="h-full flex flex-col">
+        <>
           <h3 className="mb-2 text-lg font-semibold">
             Credit Class: {creditClass.id}
           </h3>
@@ -83,17 +83,14 @@ export default async function CreditClassPage({
               </ValueColumn>
             </InfoTable>
           </div>
-          <h3 className="mt-6 text-lg font-semibold">Projects</h3>
+          <h3 className="mt-4 text-lg font-semibold">Projects</h3>
           <p className="mb-2 text-sm text-gray-400">
             The following projects are registered with the above credit class
           </p>
-          <div className="h-max">
-            <ProjectsTable projects={projects} />
-          </div>
-          <div className="h-[60vh] mt-4">
-            <ResolvedMetadata iri={creditClass.metadata} />
-          </div>
-        </div>
+          <ProjectsTable projects={projects} />
+          <div className="mt-4" />
+          <ResolvedMetadata iri={creditClass.metadata} />
+        </>
       )}
     </Layout>
   );
