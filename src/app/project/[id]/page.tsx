@@ -1,12 +1,11 @@
 import axios from "axios";
+import Layout from "@/components/Layout";
 import { Project } from "@/utils/types";
-import React from "react";
 import MetadataLink from "@/components/MetadataLink";
 import CreditClassLink from "@/components/CreditClassLink";
 import AddressLink from "@/components/AddressLink";
 import { InfoTable, KeyColumn, ValueColumn } from "@/components/InfoTable";
 import ResolvedMetadata from "@/components/ResolvedMetadata";
-import Header from "@/components/Header";
 import { Table, TableRow, TableCell } from "@/components/GenericTable";
 import Link from "next/link";
 
@@ -47,8 +46,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   if (!project) return <div>Loading...</div>;
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <Header />
+    <Layout>
       {project && (
         <>
           <h3 className="mb-2 text-lg font-semibold">Project: {project.id}</h3>
@@ -87,6 +85,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <ResolvedMetadata iri={project.metadata} />
         </>
       )}
-    </div>
+    </Layout>
   );
 }

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import InfoStats from "@/components/InfoStats";
-import Header from "@/components/Header";
+import Layout from "@/components/Layout";
 import { roundToDecimalPlaces } from "@/utils/round";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -220,8 +220,7 @@ const StatsPage: React.FC = () => {
   );
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <Header />
+    <Layout>
       <h3 className="mb-4 text-lg font-semibold">Statistics</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {stats.map((stat, index) => (
@@ -254,7 +253,7 @@ const StatsPage: React.FC = () => {
         .map(([abbrev, creditType]) =>
           renderCreditTypeSection(abbrev, creditType)
         )}
-    </div>
+    </Layout>
   );
 };
 

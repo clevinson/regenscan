@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Header from "@/components/Header";
+import Layout from "@/components/Layout";
 import CreditClassesTable from "@/components/CreditClassesTable";
 
 interface CreditClass {
@@ -26,8 +26,7 @@ export default function CreditClassesPage() {
   }, []);
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <Header />
+    <Layout>
       <h3 className="mb-2 text-lg font-semibold">Credit Classes</h3>
       <p className="mb-2 text-sm text-gray-400">
         Credit Classes are highest level of abstraction in Regen Network's
@@ -37,6 +36,6 @@ export default function CreditClassesPage() {
         biodiversity).
       </p>
       <CreditClassesTable creditClasses={creditClasses} />
-    </div>
+    </Layout>
   );
 }

@@ -2,9 +2,8 @@ import axios from "axios";
 import JsonViewer from "../../../components/JsonViewer";
 import DatasetInfo from "@/components/DatasetInfo";
 import { Reference } from "../../../utils/types";
-import React from "react";
 import dayjs from "dayjs";
-import Header from "@/components/Header";
+import Layout from "@/components/Layout";
 
 interface DatasetProps {
   params: {
@@ -96,8 +95,7 @@ export default async function Dataset({ params }: DatasetProps) {
   if (!dataset) return <div>Loading...</div>;
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <Header />
+    <Layout>
       <DatasetInfo
         iri={iri}
         usedIn={usedIn}
@@ -112,6 +110,6 @@ export default async function Dataset({ params }: DatasetProps) {
       <div className="text-xs max-h-96 overflow-y-auto p-4 bg-gray-50 rounded-lg border border-gray-300">
         <JsonViewer payload={dataset.payload} />
       </div>
-    </div>
+    </Layout>
   );
 }

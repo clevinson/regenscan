@@ -1,17 +1,15 @@
 import axios from "axios";
+import Layout from "@/components/Layout";
 import { CreditClass } from "@/utils/types";
-import React from "react";
 import MetadataLink from "@/components/MetadataLink";
 import AddressLink from "@/components/AddressLink";
 import SeeMore from "@/components/SeeMore";
 import { InfoTable, KeyColumn, ValueColumn } from "@/components/InfoTable";
 import ResolvedMetadata from "@/components/ResolvedMetadata";
-import Header from "@/components/Header";
 
 export default async function AboutPage() {
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <Header />
+    <Layout>
       <h3 className="mt-2 mb-4 text-xl text- font-semibold">About</h3>
       <div className="text-md">
         Regenscan was designed to fill a gap in block explorers supporting{" "}
@@ -66,6 +64,6 @@ export default async function AboutPage() {
         </a>{" "}
         🌴✌️
       </div>
-    </div>
+    </Layout>
   );
 }

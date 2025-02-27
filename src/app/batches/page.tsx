@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Header from "@/components/Header";
+import Layout from "@/components/Layout";
 import { Table, TableRow, TableCell } from "@/components/GenericTable";
 import Link from "next/link";
 
@@ -35,8 +35,7 @@ const AllBatchesPage: React.FC = () => {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <Header />
+    <Layout>
       <h3 className="mb-4 text-lg font-semibold">All Batches</h3>
       <Table headers={["Denom", "Issuance Date"]}>
         {batches.map((batch) => (
@@ -48,7 +47,7 @@ const AllBatchesPage: React.FC = () => {
           </TableRow>
         ))}
       </Table>
-    </div>
+    </Layout>
   );
 };
 

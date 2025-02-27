@@ -13,7 +13,7 @@ const Header = () => {
   };
 
   return (
-    <header className="h-16 mb-4 text-md">
+    <header className="mb-4 text-md">
       <div className="container mx-auto flex justify-between items-center px-0">
         <div className="flex items-center space-x-4 md:hidden">
           <button onClick={toggleMenu} className="focus:outline-none mr-0">

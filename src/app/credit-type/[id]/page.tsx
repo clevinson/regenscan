@@ -1,6 +1,5 @@
 import axios from "axios";
-import React from "react";
-import Header from "@/components/Header";
+import Layout from "@/components/Layout";
 import { InfoTable, KeyColumn, ValueColumn } from "@/components/InfoTable";
 import CreditClassesTable from "@/components/CreditClassesTable";
 
@@ -37,8 +36,7 @@ export default async function CreditTypePage({ params }: CreditTypePageProps) {
   if (!creditType) return <div>Loading...</div>;
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <Header />
+    <Layout>
       {creditType && (
         <div className="flex flex-col">
           <h3 className="mb-2 text-lg font-semibold">
@@ -64,6 +62,6 @@ export default async function CreditTypePage({ params }: CreditTypePageProps) {
           <CreditClassesTable creditClasses={creditClasses} />
         </div>
       )}
-    </div>
+    </Layout>
   );
 }
