@@ -3,6 +3,7 @@ import React from "react";
 interface TableProps {
   headers: string[];
   children: React.ReactNode;
+  className?: string;
 }
 
 interface TableRowProps {
@@ -13,9 +14,18 @@ interface TableCellProps {
   children: React.ReactNode;
 }
 
-export const Table: React.FC<TableProps> = ({ headers, children }) => {
+export const Table: React.FC<TableProps> = ({
+  className,
+  headers,
+  children,
+}) => {
   return (
-    <div className="text-xs bg-gray-50 rounded-lg border border-gray-300 overflow-scroll min-h-max">
+    <div
+      className={
+        "text-xs bg-gray-50 rounded-lg border border-gray-300 overflow-scroll min-h-max " +
+        className
+      }
+    >
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-100">
           <tr>

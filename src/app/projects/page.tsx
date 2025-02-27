@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Header from "@/components/Header";
+import Layout from "@/components/Layout";
 import ProjectsTable from "@/components/ProjectsTable";
 
 interface Project {
@@ -27,12 +27,9 @@ export default function ProjectsPage() {
   }, []);
 
   return (
-    <div className="h-screen">
-      <div className="max-w-5xl mx-auto p-6 h-full flex flex-col">
-        <Header />
-        <h3 className="mb-4 text-lg font-semibold">Projects</h3>
-        <ProjectsTable projects={projects} />
-      </div>
-    </div>
+    <Layout>
+      <h3 className="mb-4 text-lg font-semibold">Projects</h3>
+      <ProjectsTable projects={projects} />
+    </Layout>
   );
 }

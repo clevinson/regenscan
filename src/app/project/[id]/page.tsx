@@ -1,13 +1,13 @@
 import axios from "axios";
+import Layout from "@/components/Layout";
 import { Project } from "@/utils/types";
-import React from "react";
 import MetadataLink from "@/components/MetadataLink";
 import CreditClassLink from "@/components/CreditClassLink";
 import AddressLink from "@/components/AddressLink";
 import { InfoTable, KeyColumn, ValueColumn } from "@/components/InfoTable";
 import ResolvedMetadata from "@/components/ResolvedMetadata";
-import Header from "@/components/Header";
 import { Table, TableRow, TableCell } from "@/components/GenericTable";
+import { formatTimestamp } from "@/utils/utils";
 import Link from "next/link";
 
 interface ProjectPageProps {
@@ -47,8 +47,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   if (!project) return <div>Loading...</div>;
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <Header />
+    <Layout>
       {project && (
         <>
           <h3 className="mb-2 text-lg font-semibold">Project: {project.id}</h3>
@@ -79,7 +78,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 <TableCell>
                   <Link href={`/batch/${batch.denom}`}>{batch.denom}</Link>
                 </TableCell>
-                <TableCell>{batch.issuance_date}</TableCell>
+                <TableCell>{formatTimestamp(batch.issuance_date)}</TableCell>
               </TableRow>
             ))}
           </Table>
@@ -87,6 +86,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <ResolvedMetadata iri={project.metadata} />
         </>
       )}
-    </div>
+    </Layout>
   );
 }

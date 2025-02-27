@@ -1,13 +1,13 @@
 import axios from "axios";
-import React from "react";
-import MetadataLink from "@/components/MetadataLink";
+import Layout from "@/components/Layout";
 import AddressLink from "@/components/AddressLink";
+import MetadataLink from "@/components/MetadataLink";
 import { InfoTable, KeyColumn, ValueColumn } from "@/components/InfoTable";
 import ResolvedMetadata from "@/components/ResolvedMetadata";
-import Header from "@/components/Header";
 import { CreditBatch } from "@/utils/types";
 import ProjectLink from "@/components/ProjectLink";
 import InfoStats from "@/components/InfoStats";
+import { formatTimestamp } from "@/utils/utils";
 
 interface CreditBatchPageProps {
   params: {
@@ -59,14 +59,13 @@ export default async function CreditBatchPage({
   ];
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <Header />
+    <Layout>
       {creditBatch && (
         <>
           <h3 className="mb-2 text-lg font-semibold">
             Credit Batch: {creditBatch.denom}
           </h3>
-          <div className="text-xs p-4 bg-gray-50 rounded-lg border border-gray-300">
+          <div className="text-xs p-4 bg-gray-50 rounded-lg border border-gray-300 overflow-x-hidden">
             <InfoTable>
               <KeyColumn>Issuer:</KeyColumn>
               <ValueColumn>
@@ -77,11 +76,15 @@ export default async function CreditBatchPage({
                 {<ProjectLink id={creditBatch.project_id} />}
               </ValueColumn>
               <KeyColumn>Start Date:</KeyColumn>
-              <ValueColumn>{creditBatch.start_date}</ValueColumn>
+              <ValueColumn>
+                {formatTimestamp(creditBatch.start_date)}
+              </ValueColumn>
               <KeyColumn>End Date:</KeyColumn>
-              <ValueColumn>{creditBatch.end_date}</ValueColumn>
+              <ValueColumn>{formatTimestamp(creditBatch.end_date)}</ValueColumn>
               <KeyColumn>Issuance Date:</KeyColumn>
-              <ValueColumn>{creditBatch.issuance_date}</ValueColumn>
+              <ValueColumn>
+                {formatTimestamp(creditBatch.issuance_date)}
+              </ValueColumn>
               <KeyColumn>Open:</KeyColumn>
               <ValueColumn>{creditBatch.open ? "Yes" : "No"}</ValueColumn>
               <KeyColumn>Metadata:</KeyColumn>
@@ -97,6 +100,6 @@ export default async function CreditBatchPage({
           <ResolvedMetadata iri={creditBatch.metadata} />
         </>
       )}
-    </div>
+    </Layout>
   );
 }

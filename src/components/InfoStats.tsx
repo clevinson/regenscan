@@ -6,14 +6,15 @@ interface InfoStatsProps {
     value: number | string;
   }>;
   cellWidth?: string;
+  className?: string;
 }
 
-const InfoStats: React.FC<InfoStatsProps> = ({ stats, cellWidth }) => {
+const InfoStats: React.FC<InfoStatsProps> = ({ stats, className }) => {
   return (
     <div className="p-4 bg-gray-50 rounded-lg border border-gray-300">
-      <div className="flex justify-between mx-4">
+      <div className="flex flex-col md:flex-row justify-between mx-4 space-y-2 md:space-y-0">
         {stats.map((stat, index) => (
-          <div key={index} className={cellWidth}>
+          <div key={index} className={"" + " " + className}>
             <div className="text-sm text-gray-500 font-medium">
               {stat.header}
             </div>

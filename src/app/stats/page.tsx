@@ -1,9 +1,9 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import InfoStats from "@/components/InfoStats";
-import Header from "@/components/Header";
-import { roundToDecimalPlaces } from "@/utils/round";
+import Layout from "@/components/Layout";
+import { roundToDecimalPlaces } from "@/utils/utils";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -46,6 +46,9 @@ const StatsPage: React.FC = () => {
   }>({});
   const [aggregatedSupplies, setAggregatedSupplies] =
     useState<AggregatedSupply>({});
+  const [tooltipVisible, setTooltipVisible] = useState<string | null>(null);
+
+  const tooltipRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     async function fetchCreditTypesCount() {
@@ -145,7 +148,25 @@ const StatsPage: React.FC = () => {
     }
 
     fetchData();
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        tooltipRef.current &&
+        !tooltipRef.current.contains(event.target as Node)
+      ) {
+        setTooltipVisible(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
+
+  const handleTooltipToggle = (abbrev: string) => {
+    setTooltipVisible((prev) => (prev === abbrev ? null : abbrev));
+  };
 
   const stats = [
     {
@@ -181,13 +202,22 @@ const StatsPage: React.FC = () => {
           .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
           .join(" ")}
         <div className="ml-2 relative group">
-          <div className="text-gray-500 cursor-pointer">
+          <div
+            className="text-gray-500 cursor-pointer"
+            onClick={() => handleTooltipToggle(abbrev)}
+          >
             <FontAwesomeIcon icon={faQuestionCircle} className="ml-1" />
           </div>
-          <div className="absolute bottom-full mb-2 hidden group-hover:block bg-gray-700 text-white text-xs w-max rounded-sm py-1 px-2 max-w-[32rem]">
-            {creditType.unit.charAt(0).toUpperCase() + creditType.unit.slice(1)}
-            <div className="absolute left-1.5 top-full w-0 h-0 border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-gray-700"></div>
-          </div>
+          {tooltipVisible === abbrev && (
+            <div
+              ref={tooltipRef}
+              className="absolute bottom-full mb-2 bg-gray-700 text-white text-xs w-max rounded-sm py-1 px-2 max-w-[32rem]"
+            >
+              {creditType.unit.charAt(0).toUpperCase() +
+                creditType.unit.slice(1)}
+              <div className="absolute left-1.5 top-full w-0 h-0 border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-gray-700"></div>
+            </div>
+          )}
         </div>
       </h4>
       <InfoStats
@@ -220,46 +250,40 @@ const StatsPage: React.FC = () => {
   );
 
   return (
-    <div className="h-screen">
-      <div className="max-w-4xl mx-auto p-6 h-full flex flex-col">
-        <Header />
-        <h3 className="mb-4 text-lg font-semibold">Statistics</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {stats.map((stat, index) => (
-            <div key={index} className="relative">
-              <InfoStats stats={[stat]} />
-              {stat.value !== "Loading..." && stat.link && (
-                <Link
-                  href={stat.link}
-                  className="absolute top-2 right-3 flex items-center"
-                >
-                  View all{" "}
-                  <FontAwesomeIcon
-                    icon={faArrowUpRightFromSquare}
-                    className="ml-1"
-                  />
-                </Link>
-              )}
-            </div>
-          ))}
-        </div>
-        <h3 className="mt-8 mb-2 text-lg font-semibold">
-          Credits Issued by Type
-        </h3>
-        {fixedCreditTypes.map((abbrev) => {
-          const creditType = creditTypes[abbrev];
-          return creditType
-            ? renderCreditTypeSection(abbrev, creditType)
-            : null;
-        })}
-        {Object.entries(creditTypes)
-          .filter(([abbrev]) => !fixedCreditTypes.includes(abbrev))
-          .map(([abbrev, creditType]) =>
-            renderCreditTypeSection(abbrev, creditType)
-          )}
+    <Layout>
+      <h3 className="mb-4 text-lg font-semibold">Statistics</h3>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {stats.map((stat, index) => (
+          <div key={index} className="relative">
+            <InfoStats stats={[stat]} />
+            {stat.value !== "Loading..." && stat.link && (
+              <Link
+                href={stat.link}
+                className="absolute top-2 right-3 flex items-center"
+              >
+                View all{" "}
+                <FontAwesomeIcon
+                  icon={faArrowUpRightFromSquare}
+                  className="ml-1"
+                />
+              </Link>
+            )}
+          </div>
+        ))}
       </div>
-      <div className="h-16"></div>
-    </div>
+      <h3 className="mt-8 mb-2 text-lg font-semibold">
+        Credits Issued by Type
+      </h3>
+      {fixedCreditTypes.map((abbrev) => {
+        const creditType = creditTypes[abbrev];
+        return creditType ? renderCreditTypeSection(abbrev, creditType) : null;
+      })}
+      {Object.entries(creditTypes)
+        .filter(([abbrev]) => !fixedCreditTypes.includes(abbrev))
+        .map(([abbrev, creditType]) =>
+          renderCreditTypeSection(abbrev, creditType)
+        )}
+    </Layout>
   );
 };
 

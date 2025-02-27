@@ -37,13 +37,15 @@ const DatasetInfo: React.FC<DatasetInfoProps> = ({
 
   return (
     <div
-      className={`bg-gray-100 shadow-lg rounded-lg p-6 mb-8 transition-all ${
+      className={`bg-gray-100 shadow-lg rounded-lg p-6 transition-all ${
         isCollapsed ? "overflow-hidden" : ""
       }`}
     >
       <div className="flex justify-between items-center">
-        <div className="text-l">
-          <h3 className="font-medium text-gray-700 break-words">{iri}</h3>
+        <div>
+          <h3 className="text-l font-medium text-gray-700 truncate max-w-72 md:max-w-none">
+            {iri}
+          </h3>
           <h3 className="text-sm text-gray-400 mr-2">Regen IRI</h3>
         </div>
         <button
@@ -96,12 +98,14 @@ const DatasetInfo: React.FC<DatasetInfoProps> = ({
                 {resolvers
                   ? resolvers.map((resolver: string, index: number) => (
                       <div key={index} className="flex items-center space-x-2">
-                        <p>{resolver}</p>
+                        <p className="truncate max-w-72 md:max-w-none">
+                          {resolver}
+                        </p>
                         <a
                           href={`${resolver}${iri}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-400 w-4"
+                          className="w-4"
                         >
                           <FontAwesomeIcon icon={faShareSquare} />
                         </a>

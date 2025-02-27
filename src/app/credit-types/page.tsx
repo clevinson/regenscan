@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Header from "@/components/Header";
+import Layout from "@/components/Layout";
 import { Table, TableRow, TableCell } from "@/components/GenericTable";
 import Link from "next/link";
 
@@ -28,24 +28,21 @@ export default function CreditTypesPage() {
   }, []);
 
   return (
-    <div className="h-screen">
-      <div className="max-w-4xl mx-auto p-6 h-full flex flex-col">
-        <Header />
-        <h3 className="mb-4 text-lg font-semibold">Credit Types</h3>
-        <Table headers={["Abbreviation", "Name", "Unit"]}>
-          {creditTypes.map((creditType) => (
-            <TableRow key={creditType.abbreviation}>
-              <TableCell>
-                <Link href={`/credit-type/${creditType.abbreviation}`}>
-                  {creditType.abbreviation}
-                </Link>
-              </TableCell>
-              <TableCell>{creditType.name}</TableCell>
-              <TableCell>{creditType.unit}</TableCell>
-            </TableRow>
-          ))}
-        </Table>
-      </div>
-    </div>
+    <Layout>
+      <h3 className="mb-4 text-lg font-semibold">Credit Types</h3>
+      <Table className="h-max" headers={["Abbreviation", "Name", "Unit"]}>
+        {creditTypes.map((creditType) => (
+          <TableRow key={creditType.abbreviation}>
+            <TableCell>
+              <Link href={`/credit-type/${creditType.abbreviation}`}>
+                {creditType.abbreviation}
+              </Link>
+            </TableCell>
+            <TableCell>{creditType.name}</TableCell>
+            <TableCell>{creditType.unit}</TableCell>
+          </TableRow>
+        ))}
+      </Table>
+    </Layout>
   );
 }

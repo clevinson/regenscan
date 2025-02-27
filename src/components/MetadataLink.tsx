@@ -5,7 +5,14 @@ interface MetadataLinkProps {
 }
 
 const MetadataLink = ({ iri }: MetadataLinkProps) => {
-  return <a href={`/dataset/${iri}`}>{iri}</a>;
+  return (
+    <a
+      className="truncate inline-block max-w-60 md:max-w-none"
+      href={`/dataset/${iri}`}
+    >
+      {iri}
+    </a>
+  );
 };
 
 export default MetadataLink;

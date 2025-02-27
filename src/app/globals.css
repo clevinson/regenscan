@@ -49,6 +49,9 @@
 @utility border-primary-green {
   border-color: rgb(var(--primary-green));
 }
+@utility border-primary-grey {
+  border-color: rgb(var(--primary-grey));
+}
 @utility hover-accent {
   @apply hover:text-accent-blue transition-all duration-200;
 }
@@ -107,7 +110,7 @@
   }
 
   body {
-    @apply min-h-screen text-base;
+    @apply text-base;
     color: rgb(var(--text-primary));
     background: rgb(var(--background-rgb));
   }

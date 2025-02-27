@@ -15,7 +15,6 @@ export default function SearchBar() {
   const router = useRouter();
 
   const handleSubmit = (e: FormEvent) => {
-    console.log("submitting");
     e.preventDefault();
     if (iri) {
       if (iri.match(typeRegex)) {
@@ -33,31 +32,34 @@ export default function SearchBar() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex text-xs items-center">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-row text-s md:text-xs items-center w-full md:w-lg"
+    >
       <input
         type="text"
         value={iri}
         onChange={(e) => setIri(e.target.value)}
         placeholder="Enter Regen IRI, Project ID, Credit Class ID, or Batch ID"
-        className="px-4 py-2 w-[480px] 
-                   bg-[rgb(var(--primary-green))] 
-                   text-[rgb(var(--text-primary))]
-                   border border-[rgb(var(--primary-grey))] 
+        className="px-4 py-2 w-full 
+                   bg-primary-green 
+                   text-primary 
+                   border border-primary-grey 
                    rounded-l-md 
                    focus:outline-0
-                   focus:border-[rgb(var(--accent-blue))]
-                   placeholder-[rgb(var(--text-secondary))]"
+                   focus:border-accent-blue
+                   placeholder-text-secondary"
       />
       <button
         type="submit"
         className="px-4 py-2 
-                   bg-[rgb(var(--primary-grey))]
-                   text-[rgb(var(--text-primary))] 
+                   bg-primary-grey
+                   text-primary 
                    rounded-r-md 
-                   hover:bg-[rgb(var(--highlight-green))]
+                   hover:bg-highlight
                    focus:outline-0
-                   border border-[rgb(var(--primary-grey))]
-                   focus:border-[rgb(var(--accent-blue))]
+                   border border-primary-grey 
+                   focus:border-accent-blue
                    transition-all"
       >
         Search
