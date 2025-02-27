@@ -5,10 +5,14 @@ interface SeeMoreProps {
   children: React.ReactNode[];
 }
 
+interface ButtonProps {
+  className: string;
+}
+
 export default function SeeMore({ children }: SeeMoreProps) {
   const [expanded, setExpanded] = useState(false);
 
-  function Button({ className }) {
+  function Button({ className }: ButtonProps) {
     return (
       <button
         className={className + " ml-2 text-accent-blue"}

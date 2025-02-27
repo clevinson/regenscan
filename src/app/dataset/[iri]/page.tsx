@@ -1,7 +1,7 @@
 import axios from "axios";
 import JsonViewer from "@/components/JsonViewer";
 import DatasetInfo from "@/components/DatasetInfo";
-import { Reference } from "@utils//types";
+import { Reference } from "@/utils/types";
 import { formatTimestamp } from "@/utils/utils";
 import Layout from "@/components/Layout";
 

@@ -6,6 +6,7 @@ interface InfoStatsProps {
     value: number | string;
   }>;
   cellWidth?: string;
+  className?: string;
 }
 
 const InfoStats: React.FC<InfoStatsProps> = ({ stats, className }) => {

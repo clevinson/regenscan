@@ -3,6 +3,7 @@ import React from "react";
 interface TableProps {
   headers: string[];
   children: React.ReactNode;
+  className?: string;
 }
 
 interface TableRowProps {
