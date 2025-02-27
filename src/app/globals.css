@@ -110,7 +110,7 @@
   }
 
   body {
-    @apply min-h-screen text-base;
+    @apply text-base;
     color: rgb(var(--text-primary));
     background: rgb(var(--background-rgb));
   }
