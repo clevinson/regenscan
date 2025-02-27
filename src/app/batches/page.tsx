@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import { Table, TableRow, TableCell } from "@/components/GenericTable";
+import { formatTimestamp } from "@/utils/utils";
 import Link from "next/link";
 
 interface Batch {
@@ -43,7 +44,7 @@ const AllBatchesPage: React.FC = () => {
             <TableCell>
               <Link href={`/batch/${batch.denom}`}>{batch.denom}</Link>
             </TableCell>
-            <TableCell>{batch.issuance_date}</TableCell>
+            <TableCell>{formatTimestamp(batch.issuance_date)}</TableCell>
           </TableRow>
         ))}
       </Table>

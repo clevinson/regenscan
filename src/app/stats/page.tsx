@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import InfoStats from "@/components/InfoStats";
 import Layout from "@/components/Layout";
-import { roundToDecimalPlaces } from "@/utils/round";
+import { roundToDecimalPlaces } from "@/utils/utils";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {

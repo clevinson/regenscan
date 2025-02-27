@@ -1,8 +1,8 @@
 import axios from "axios";
-import JsonViewer from "../../../components/JsonViewer";
+import JsonViewer from "@/components/JsonViewer";
 import DatasetInfo from "@/components/DatasetInfo";
-import { Reference } from "../../../utils/types";
-import dayjs from "dayjs";
+import { Reference } from "@utils//types";
+import { formatTimestamp } from "@/utils/utils";
 import Layout from "@/components/Layout";
 
 interface DatasetProps {
@@ -71,11 +71,7 @@ export default async function Dataset({ params }: DatasetProps) {
       }
     }
 
-    anchorTimestamp = anchorResponse.data?.anchor?.timestamp
-      ? dayjs(anchorResponse.data.anchor.timestamp).format(
-          "MMMM D, YYYY h:mm A"
-        )
-      : null;
+    anchorTimestamp = formatTimestamp(anchorResponse.data?.anchor?.timestamp);
 
     attestations = attestationsResponse.data?.attestations?.join(", ") || null;
 
