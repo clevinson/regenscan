@@ -20,10 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Head>
-        <GoogleAnalytics gaId="G-CH1B1X54GT" />
         <link rel="stylesheet" href="/fontawesome/css/all.min.css" />
       </Head>
       <body className={inter.className}>{children}</body>
+      <GoogleAnalytics gaId="G-CH1B1X54GT" />
     </html>
   );
 }
