@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import Head from "next/head";
 import "./globals.css";
 
@@ -19,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Head>
+        <GoogleAnalytics gaId="G-CH1B1X54GT" />
         <link rel="stylesheet" href="/fontawesome/css/all.min.css" />
       </Head>
       <body className={inter.className}>{children}</body>
